@@ -119,7 +119,7 @@ python main.py {speaker_name}
 ---
 
 ## To-do
-- Audio-Upsampling Using [NU-Wave2](https://github.com/mindslab-ai/nuwave2)
+- Audio-Upsampling Using [NU-Wave2](https://github.com/mindslab-ai/nuwave2) ✅
 
 ---
 
