@@ -33,4 +33,4 @@ os.system(f"python oneclickprocess.py --name {model_name}")
 
 #NU-Wave2 Processing
 os.chdir('../nuwave2')
-os.system(f"python inference.py -c ./nuwave2.ckpt -i ../barkrvc_out.wav --sr 24000 --steps 16")
+os.system(f"python inference.py -c ./nuwave2.ckpt -i ../barkrvc_out.wav --sr 24000")

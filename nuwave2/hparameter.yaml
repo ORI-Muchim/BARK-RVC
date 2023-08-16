@@ -45,4 +45,4 @@ log:
   name: 'nuwave2'
   checkpoint_dir: 'checkpoint'
   tensorboard_dir: 'tensorboard'
-  test_result_dir: 'test_sample/result'
+  test_result_dir: '../'

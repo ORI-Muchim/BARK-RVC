@@ -74,7 +74,6 @@ class BSFT(nn.Module):
 class FourierUnit(nn.Module):
     def __init__(self, in_channels, out_channels, bsft_channels, filter_length=1024, hop_length=256, win_length=1024,
                  sampling_rate=48000):
-        # bn_layer not used
         super(FourierUnit, self).__init__()
         self.sampling_rate = sampling_rate
         self.n_fft = filter_length
@@ -89,23 +88,26 @@ class FourierUnit(nn.Module):
 
     def forward(self, x, band):
         batch = x.shape[0]
-
         x = x.view(-1, x.size()[-1])
 
+        # torch.stft 호출을 복소수로 수정
         ffted = torch.stft(x, self.n_fft, hop_length=self.hop_size, win_length=self.win_size, window=self.hann_window,
-                          center=True, normalized=True, onesided=True, return_complex=False)
-        ffted = ffted.permute(0, 3, 1, 2).contiguous()  # (BC, 2, n_fft/2+1, T)
-        ffted = ffted.view((batch, -1,) + ffted.size()[2:])  # (B, 2C, n_fft/2+1, T)
+                          center=True, normalized=True, onesided=True, return_complex=True)
+        ffted_abs = torch.view_as_real(ffted).permute(0, 3, 1, 2).contiguous()  # 복소수를 실수로 변환
+        ffted_abs = ffted_abs.view((batch, -1,) + ffted_abs.size()[2:]) 
 
-        ffted = relu(self.bsft(ffted, band))  # (B, 2C, n_fft/2+1, T)
-        ffted = self.conv_layer(ffted)
+        ffted_abs = relu(self.bsft(ffted_abs, band))
+        ffted_abs = self.conv_layer(ffted_abs)
 
-        ffted = ffted.view((-1, 2,) + ffted.size()[2:]).permute(0, 2, 3, 1).contiguous()  # (BC, n_fft/2+1, T, 2)
+        ffted = ffted_abs.view((-1, 2,) + ffted_abs.size()[2:]).permute(0, 2, 3, 1).contiguous()
+        ffted = torch.view_as_complex(ffted)  # 실수를 복소수로 변환
 
+        # torch.istft 호출 수정
         output = torch.istft(ffted, self.n_fft, hop_length=self.hop_size, win_length=self.win_size, window=self.hann_window,
-                          center=True, normalized=True, onesided=True)
+                             center=True, normalized=True, onesided=True)
         output = output.view(batch, -1, x.size()[-1])
         return output
+
 
 
 class SpectralTransform(nn.Module):

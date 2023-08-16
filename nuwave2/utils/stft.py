@@ -11,14 +11,11 @@ class STFTMag(nn.Module):
         self.hop = hop
         self.register_buffer('window', torch.hann_window(nfft), False)
 
-    #x: [B,T] or [T]
     @torch.no_grad()
     def forward(self, x):
         T = x.shape[-1]
-        stft = torch.stft(x,
-                          self.nfft,
-                          self.hop,
-                          window=self.window,
-                          )#return_complex=False)  #[B, F, TT,2]
-        mag = torch.norm(stft, p=2, dim =-1) #[B, F, TT]
+        window = self.window.to(x.device)
+        stft = torch.stft(x, self.nfft, self.hop, window=window, return_complex=True)
+        mag = torch.norm(stft, p=2, dim=-1)  # [B, F, TT]
         return mag
+

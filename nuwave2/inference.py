@@ -5,28 +5,12 @@ import argparse
 import torch
 import librosa as rosa
 from scipy.io.wavfile import write as swrite
-import matplotlib.pyplot as plt
 from utils.stft import STFTMag
 import numpy as np
 from scipy.signal import sosfiltfilt
 from scipy.signal import cheby1
 from scipy.signal import resample_poly
 
-
-def save_stft_mag(wav, fname):
-    fig = plt.figure(figsize=(9, 3))
-    plt.imshow(rosa.amplitude_to_db(stft(wav[0].detach().cpu()).numpy(),
-               ref=np.max, top_db = 80.),
-               aspect='auto',
-               origin='lower',
-               interpolation='none')
-    plt.colorbar()
-    plt.xlabel('Frames')
-    plt.ylabel('Channels')
-    plt.tight_layout()
-    fig.savefig(fname, format='png')
-    plt.close()
-    return
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
@@ -112,22 +96,19 @@ if __name__ == '__main__':
     wav_recon, wav_list = model.inference(wav_l, band, args.steps, noise_schedule)
 
     wav = torch.clamp(wav, min=-1, max=1 - torch.finfo(torch.float16).eps)
-    save_stft_mag(wav, os.path.join(hparams.log.test_result_dir, f'wav.png'))
-    if args.gt:
-        swrite(os.path.join(hparams.log.test_result_dir, f'wav.wav'),
-               hparams.audio.sampling_rate, wav[0].detach().cpu().numpy())
-    else:
-        swrite(os.path.join(hparams.log.test_result_dir, f'wav.wav'),
-               args.sr, wav[0].detach().cpu().numpy())
+    # if args.gt:
+    #     swrite(os.path.join(hparams.log.test_result_dir, f'wav.wav'),
+    #            hparams.audio.sampling_rate, wav[0].detach().cpu().numpy())
+    # else:
+    #     swrite(os.path.join(hparams.log.test_result_dir, f'wav.wav'),
+    #            args.sr, wav[0].detach().cpu().numpy())
 
-    wav_l = torch.clamp(wav_l, min=-1, max=1 - torch.finfo(torch.float16).eps)
-    save_stft_mag(wav_l, os.path.join(hparams.log.test_result_dir, f'wav_l.png'))
-    swrite(os.path.join(hparams.log.test_result_dir, f'wav_l.wav'),
-           hparams.audio.sampling_rate, wav_l[0].detach().cpu().numpy())
+    # wav_l = torch.clamp(wav_l, min=-1, max=1 - torch.finfo(torch.float16).eps)
+    # swrite(os.path.join(hparams.log.test_result_dir, f'wav_l.wav'),
+    #        hparams.audio.sampling_rate, wav_l[0].detach().cpu().numpy())
 
     wav_recon = torch.clamp(wav_recon, min=-1, max=1 - torch.finfo(torch.float16).eps)
-    save_stft_mag(wav_recon, os.path.join(hparams.log.test_result_dir, f'result.png'))
-    swrite(os.path.join(hparams.log.test_result_dir, f'result.wav'),
+    swrite(os.path.join(hparams.log.test_result_dir, f'barkrvc_out.wav'),
            hparams.audio.sampling_rate, wav_recon[0].detach().cpu().numpy())
 
     # for i in range(len(wav_list)):
