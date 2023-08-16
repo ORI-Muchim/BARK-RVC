@@ -66,3 +66,7 @@ httpx==0.23.0
 torchcrepe==0.0.20
 fastapi==0.88
 pillow==9.5.0
+ffmpeg
+prefetch_generator
+omegaconf==2.0.6
+pytorch_lightning==1.2.10

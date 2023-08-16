@@ -7,3 +7,4 @@ RVC/TEMP/
 RVC/hubert_base.pt
 RVC/pretrained_v2/f0D48k.pth
 RVC/pretrained_v2/f0G48k.pth
+nuwave2/nuwave2.ckpt
