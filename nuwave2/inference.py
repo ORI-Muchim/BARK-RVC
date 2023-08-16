@@ -117,3 +117,4 @@ if __name__ == '__main__':
     #     swrite(os.path.join(hparams.log.test_result_dir, f'result_{i}.wav'),
     #            hparams.audio.sampling_rate, wav_recon_i[0].detach().cpu().numpy())
 
+print("NU-Wave2 Audio-Upsampling Complete.")
