@@ -1,0 +1,9 @@
+__pycache__/
+RVC/__pycache__/
+suno_bark.egg-info/
+*.DS_Store
+*.pyd
+RVC/TEMP/
+RVC/hubert_base.pt
+RVC/pretrained_v2/f0D48k.pth
+RVC/pretrained_v2/f0G48k.pth

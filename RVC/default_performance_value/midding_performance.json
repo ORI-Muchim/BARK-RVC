@@ -1,0 +1,8 @@
+{
+  "index_rate": 0,
+  "n_cpu": 3,
+  "f0method": 3,
+  "crossfade_time": 0.15,
+  "extra_time": 2,
+  "block_time": 0.15
+}
