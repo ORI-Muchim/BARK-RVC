@@ -90,19 +90,17 @@ class FourierUnit(nn.Module):
         batch = x.shape[0]
         x = x.view(-1, x.size()[-1])
 
-        # torch.stft 호출을 복소수로 수정
         ffted = torch.stft(x, self.n_fft, hop_length=self.hop_size, win_length=self.win_size, window=self.hann_window,
                           center=True, normalized=True, onesided=True, return_complex=True)
-        ffted_abs = torch.view_as_real(ffted).permute(0, 3, 1, 2).contiguous()  # 복소수를 실수로 변환
+        ffted_abs = torch.view_as_real(ffted).permute(0, 3, 1, 2).contiguous()
         ffted_abs = ffted_abs.view((batch, -1,) + ffted_abs.size()[2:]) 
 
         ffted_abs = relu(self.bsft(ffted_abs, band))
         ffted_abs = self.conv_layer(ffted_abs)
 
         ffted = ffted_abs.view((-1, 2,) + ffted_abs.size()[2:]).permute(0, 2, 3, 1).contiguous()
-        ffted = torch.view_as_complex(ffted)  # 실수를 복소수로 변환
+        ffted = torch.view_as_complex(ffted)
 
-        # torch.istft 호출 수정
         output = torch.istft(ffted, self.n_fft, hop_length=self.hop_size, win_length=self.win_size, window=self.hann_window,
                              center=True, normalized=True, onesided=True)
         output = output.view(batch, -1, x.size()[-1])
