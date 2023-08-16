@@ -2,8 +2,6 @@ from lightning_model import NuWave2
 from omegaconf import OmegaConf as OC
 import os
 import argparse
-import datetime
-from glob import glob
 import torch
 import librosa as rosa
 from scipy.io.wavfile import write as swrite
@@ -11,9 +9,8 @@ import matplotlib.pyplot as plt
 from utils.stft import STFTMag
 import numpy as np
 from scipy.signal import sosfiltfilt
-from scipy.signal import butter, cheby1, cheby2, ellip, bessel
+from scipy.signal import cheby1
 from scipy.signal import resample_poly
-import random
 
 
 def save_stft_mag(wav, fname):

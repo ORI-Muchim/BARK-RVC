@@ -18,6 +18,7 @@ text_prompt = """
      Hello, my name is Suno. And, uh — and I like pizza. [laughs] 
      But I also have other interests such as playing tic tac toe.
 """
+
 audio_array = generate_audio(text_prompt, voice_preset)
 
 scipy.io.wavfile.write("barkrvc_out.wav", SAMPLE_RATE, audio_array)
@@ -28,3 +29,8 @@ get_model()
 
 os.chdir('./RVC')
 os.system(f"python oneclickprocess.py --name {model_name}")
+
+
+#NU-Wave2 Processing
+os.chdir('../nuwave2')
+os.system(f"python inference.py -c ./nuwave2.ckpt -i ../barkrvc_out.wav --sr 24000 --steps 16")
