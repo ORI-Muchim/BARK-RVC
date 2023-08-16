@@ -94,7 +94,7 @@ If you open `./main.py`, There is sample text. There are many text prompts in th
 | Turkish (tr) | ✅ |
 | Chinese, simplified (zh) | ✅ |
 
-Audio Presets can be found here:
+Voice Presets can be found here:
 ```sh
 https://suno-ai.notion.site/8b8e8749ed514b0cbf3f699013548683?v=bc67cff786b04b50b3ceb756fd05f68c
 ```
