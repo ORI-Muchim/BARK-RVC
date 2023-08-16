@@ -23,7 +23,9 @@ pip install torch==2.0.0+cu117 torchvision==0.15.1+cu117 torchaudio==2.0.1 --ind
 ```
 
 CUDA 11.7 install:
-`https://developer.nvidia.com/cuda-11-7-0-download-archive`
+```sh
+https://developer.nvidia.com/cuda-11-7-0-download-archive
+```
 
 ---
 
