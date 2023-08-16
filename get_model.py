@@ -1,13 +1,10 @@
 import os
 import requests
 
-discriminator = './RVC/pretrained_v2/f0D48k.pth'
-generator = './RVC/pretrained_v2/f0G48k.pth'
-hubert = './RVC/hubert_base.pt'
 nuwave2 = './nuwave2/nuwave2.ckpt'
 
 def get_model():
-    if not os.path.isfile(discriminator) or os.path.isfile(generator) or os.path.isfile(hubert) or os.path.isfile(nuwave2):
+    if not os.path.isfile(nuwave2):
         url1 = 'https://github.com/ORI-Muchim/BARK-RVC/releases/download/v1.0/f0D48k.pth'
         url2 = 'https://github.com/ORI-Muchim/BARK-RVC/releases/download/v1.0/f0G48k.pth'
         url3 = 'https://github.com/ORI-Muchim/BARK-RVC/releases/download/v1.0/hubert_base.pt'
