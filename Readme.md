@@ -63,7 +63,7 @@ pip install -r requirements.txt
 
 ## Text-Prompt & Support-Languages
 
-If you open `./main.py`, There is sample text. There are many text prompts in the bark.
+If you open `./main.py`, There is sample text. There are many text prompts such as [laughs] in bark.
 
 - `[laughter]`
 - `[laughs]`
