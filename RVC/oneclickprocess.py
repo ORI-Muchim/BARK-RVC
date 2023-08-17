@@ -1244,7 +1244,7 @@ if not os.path.isfile(model_file):
     gpu_info9 = gpu_info
     f0method8 = "harvest"
     save_epoch10 = 5
-    total_epoch11 = 20
+    total_epoch11 = 15
     batch_size12 = default_batch_size
     if_save_latest13 = "是"
     if_cache_gpu17 = "否"
