@@ -13,3 +13,4 @@ nuwave2/nuwave2.ckpt
 *.DS*
 *__pycache__*
 *.pyc
+/barkrvc_out.wav

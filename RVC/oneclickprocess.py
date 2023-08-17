@@ -1225,7 +1225,11 @@ def export_onnx(ModelPath, ExportedPath):
 
 
 #Training
-model_file = f"./weights/{model_name},pth"
+# Assuming model_name is initialized somewhere before this code
+model_file = f"./weights/{model_name}.pth"
+
+# Print model_file path for verification
+print(f"Checking model file at: {model_file}")
 
 if not os.path.isfile(model_file):
     exp_dir1 = model_name
@@ -1248,14 +1252,13 @@ if not os.path.isfile(model_file):
     pretrained_G14 = "pretrained_v2/f0G48k.pth"
     pretrained_D15 = "pretrained_v2/f0D48k.pth"
 
-    train1key(exp_dir1, sr2, if_f0_3, trainset_dir4, spk_id5, np7, f0method8, save_epoch10, total_epoch11, batch_size12, if_save_latest13, pretrained_G14, pretrained_D15, gpus16, if_cache_gpu17, if_save_every_weights18, version19)
-
     result = train1key(exp_dir1, sr2, if_f0_3, trainset_dir4, spk_id5, np7, f0method8, save_epoch10, total_epoch11, batch_size12, if_save_latest13, pretrained_G14, pretrained_D15, gpus16, if_cache_gpu17, if_save_every_weights18, version19)
 
     for output in result:
         print(output)
 else:
     print('Skipping Training... Model already exists.')
+
 
 
 #Inference
