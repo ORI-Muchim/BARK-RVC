@@ -64,7 +64,7 @@ pyworld==0.3.2
 httpx==0.23.0
 #onnxruntime-gpu
 torchcrepe==0.0.20
-fastapi==0.88
+fastapi==0.109.1
 pillow==10.2.0
 ffmpeg
 prefetch_generator
